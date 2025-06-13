@@ -55,6 +55,6 @@ Berikut adalah penjelasan singkat mengenai file-file utama dalam proyek ini:
 
 --
 ##🦹‍♂😡😎Kelompok 4
-*Akhmad Hidayat* H071241003
-*Didit Iqbal Alfaruzy* H071241032
-*Isnadia Nurfadillah* H071241052
+- *Akhmad Hidayat* H071241003
+- *Didit Iqbal Alfaruzy* H071241032
+- *Isnadia Nurfadillah* H071241052
