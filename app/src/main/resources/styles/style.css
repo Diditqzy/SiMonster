@@ -10,10 +10,30 @@
 .sidebar { -fx-background-color: #212121; }
 .sidebar-label { -fx-font-size: 13px; -fx-text-fill: #c7c7c7; }
 .sidebar-label-bold { -fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #ffffff; }
-.sidebar-button { -fx-background-color: transparent; -fx-text-fill: #dcdcdc; -fx-font-size: 14px; -fx-alignment: center-left; -fx-padding: 0 0 0 30px; -fx-background-radius: 0; -fx-graphic-text-gap: 15; }
-.sidebar-button:hover { -fx-background-color: #333333; -fx-text-fill: white; -fx-cursor: hand; }
-.sidebar-button-logout { -fx-background-color: transparent; -fx-text-fill: #e0e0e0; -fx-font-size: 14px; -fx-font-weight: bold; -fx-alignment: center-left; -fx-padding: 0 0 0 30px; -fx-border-color: #690B22; -fx-border-width: 2px 0 0 0; -fx-graphic-text-gap: 15; }
-.sidebar-button-logout:hover { -fx-background-color: #690B22; -fx-text-fill: white; -fx-cursor: hand; }
+
+/* === EFEK HOVER DENGAN ANIMASI SCALE === */
+.sidebar-button { 
+    -fx-background-color: transparent; -fx-text-fill: #dcdcdc; -fx-font-size: 14px; 
+    -fx-alignment: center-left; -fx-padding: 0 0 0 30px; -fx-background-radius: 0; 
+    -fx-graphic-text-gap: 15;
+    -fx-transition: all 0.2s ease-in-out;
+}
+.sidebar-button:hover { 
+    -fx-background-color: #333333; -fx-text-fill: white; -fx-cursor: hand;
+    -fx-scale-x: 1.05; -fx-scale-y: 1.05;
+}
+
+.sidebar-button-logout { 
+    -fx-background-color: transparent; -fx-text-fill: #e0e0e0; -fx-font-size: 14px; 
+    -fx-font-weight: bold; -fx-alignment: center-left; -fx-padding: 0 0 0 30px; 
+    -fx-border-color: #690B22; -fx-border-width: 2px 0 0 0; -fx-graphic-text-gap: 15;
+    -fx-transition: all 0.2s ease-in-out;
+}
+.sidebar-button-logout:hover { 
+    -fx-background-color: #690B22; -fx-text-fill: white; -fx-cursor: hand;
+    -fx-scale-x: 1.05; -fx-scale-y: 1.05;
+}
+
 .glyph-icon { -fx-fill: #dcdcdc; }
 .sidebar-button:hover .glyph-icon { -fx-fill: white; }
 .sidebar-button-logout:hover .glyph-icon { -fx-fill: white; }
@@ -43,32 +63,8 @@
 .task-scroll-pane .viewport { -fx-background-color: transparent; }
 .task-item-box { -fx-alignment: center-left; }
 .task-item-reps-label { -fx-font-size: 13px; -fx-text-fill: #666666; -fx-font-weight: bold; -fx-padding: 0 5px 0 0; }
-
-/* === STYLING BARU UNTUK RIWAYAT LATIHAN === */
-.history-scroll-pane {
-    -fx-background: transparent;
-    -fx-background-color: transparent;
-}
-
-.history-card {
-    -fx-background-color: white;
-    -fx-padding: 15px;
-    -fx-background-radius: 8px;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 1);
-}
-
-.history-date {
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #690B22;
-}
-
-.history-program {
-    -fx-font-size: 13px;
-    -fx-text-fill: #555555;
-}
-
-.history-details {
-    -fx-font-size: 14px;
-    -fx-text-fill: #333333;
-}
+.history-scroll-pane { -fx-background: transparent; -fx-background-color: transparent; }
+.history-card { -fx-background-color: white; -fx-padding: 15px; -fx-background-radius: 8px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 1); }
+.history-date { -fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #690B22; }
+.history-program { -fx-font-size: 13px; -fx-text-fill: #555555; }
+.history-details { -fx-font-size: 14px; -fx-text-fill: #333333; }

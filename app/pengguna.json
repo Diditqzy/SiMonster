@@ -50,15 +50,40 @@
       }
     ]
   },
+  "q-pe.e32e3-p;42.r": {
+    "password": "fd,sos,f;w3rl2",
+    "nama": "c-23qed2p;",
+    "level": 1,
+    "exp": 0,
+    "badge": "Pemula",
+    "riwayat": [
+    ]
+  },
   "F": {
     "password": "Didit123",
     "nama": "Did",
-    "level": 1,
-    "exp": 88,
-    "badge": "Pemula",
-    "siklusProgram": "Full Body",
-    "siklusHariKe": 4,
+    "level": 3,
+    "exp": 153,
+    "badge": "TITAN",
     "riwayat": [
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Muscle Up (Assisted), Clean & Press, Sandbag Carry, Dragon Flag, Jump Rope",
+        "hariKe": 7,
+        "namaProgram": "Full Body"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Kuis (Skor: 0)",
+        "hariKe": 6,
+        "namaProgram": "Full Body"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Turkish Get-Up, Thrusters, Chin Up, Bicycle Crunch, Sled Push",
+        "hariKe": 5,
+        "namaProgram": "Full Body"
+      },
       {
         "tanggal": "14-06-2025",
         "daftarLatihan": "Burpees, Pull Up, Kettlebell Swing, Mountain Climber, Plank",
@@ -83,6 +108,15 @@
         "hariKe": 4,
         "namaProgram": "Full Body"
       }
+    ]
+  },
+  "f": {
+    "password": "123456789p",
+    "nama": "s",
+    "level": 1,
+    "exp": 0,
+    "badge": "Pemula",
+    "riwayat": [
     ]
   }
 }
