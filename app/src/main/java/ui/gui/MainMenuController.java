@@ -1,6 +1,11 @@
 package ui.gui;
 
 import data.ManajemenData;
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.SequentialTransition;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +19,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
 import model.latihan.*;
 import model.soal.BankSoal;
 import model.soal.Soal;
@@ -35,6 +41,7 @@ public class MainMenuController {
     private Pengguna penggunaSaatIni;
     private Map<String, Pengguna> basisDataPengguna;
 
+    // ... (Variabel FXML lainnya tetap sama)
     @FXML private Label welcomeLabel;
     @FXML private Label levelLabel;
     @FXML private Label expLabel;
@@ -51,7 +58,8 @@ public class MainMenuController {
     
     @FXML private Button doExerciseButton;
     @FXML private Button createProgramButton;
-    
+
+    // (Metode inti lainnya tetap sama)
     public void initData(MainApp mainApp, Pengguna pengguna, Map<String, Pengguna> basisDataPengguna) {
         this.mainApp = mainApp;
         this.penggunaSaatIni = pengguna;
@@ -75,19 +83,51 @@ public class MainMenuController {
         } catch (IOException e) { e.printStackTrace(); }
     }
     
+    // === METODE NAVIGASI DENGAN ANIMASI ===
     @FXML private void showDashboard() {
-        dashboardPane.setVisible(true); programPane.setVisible(false); historyPane.setVisible(false);
+        switchPane(dashboardPane);
     }
     
     @FXML private void showProgram() {
-        dashboardPane.setVisible(false); programPane.setVisible(true); historyPane.setVisible(false);
         updateProgramPane();
+        switchPane(programPane);
     }
 
     @FXML private void showHistory() {
-        dashboardPane.setVisible(false); programPane.setVisible(false); historyPane.setVisible(true);
         loadHistoryData();
+        switchPane(historyPane);
     }
+    
+    // Metode helper baru untuk transisi antar panel
+    private void switchPane(Node targetPane) {
+        dashboardPane.setVisible(false);
+        programPane.setVisible(false);
+        historyPane.setVisible(false);
+        
+        targetPane.setVisible(true);
+        fadeIn(targetPane);
+    }
+
+    // Metode helper untuk animasi fade-in
+    private void fadeIn(Node node) {
+        FadeTransition ft = new FadeTransition(Duration.millis(500), node);
+        ft.setFromValue(0.0);
+        ft.setToValue(1.0);
+        ft.play();
+    }
+    
+    // Metode helper untuk animasi "pop" pada label
+    private void popAnimation(Node node) {
+        ScaleTransition st = new ScaleTransition(Duration.millis(150), node);
+        st.setFromX(1.0);
+        st.setFromY(1.0);
+        st.setToX(1.2);
+        st.setToY(1.2);
+        st.setAutoReverse(true);
+        st.setCycleCount(2);
+        st.play();
+    }
+
 
     private void updateProgramPane() {
         programDetailsContainer.getChildren().clear();
@@ -181,6 +221,7 @@ public class MainMenuController {
         int totalExp = aktivitas.getDaftarLatihanHarian().stream().mapToInt(Latihan::getExp).sum();
         penggunaSaatIni.addExp(totalExp);
         showAlert(Alert.AlertType.INFORMATION, "Latihan Selesai!", "Kerja bagus! Anda mendapatkan " + totalExp + " EXP.");
+        popAnimation(expLabel); // Animasi EXP
         
         String daftarLatihanStr = aktivitas.getDaftarLatihanHarian()
             .stream()
@@ -216,7 +257,7 @@ public class MainMenuController {
 
             if (soalUntukKuis.isEmpty()) {
                 showAlert(Alert.AlertType.INFORMATION, "Tidak Ada Kuis", "Maaf, tidak ada kuis yang tersedia untuk kategori ini (" + kategoriKuis + "). Selamat beristirahat!");
-                penggunaSaatIni.addExp(10);
+                penggunaSaatIni.addExp(10); popAnimation(expLabel);
                 buatCatatanDanLanjut(siklus, "Istirahat (tanpa kuis)");
                 return;
             }
@@ -226,7 +267,7 @@ public class MainMenuController {
 
             quizResult.ifPresent(skor -> {
                 int expDidapat = skor * 15;
-                penggunaSaatIni.addExp(expDidapat);
+                penggunaSaatIni.addExp(expDidapat); popAnimation(expLabel);
                 showAlert(Alert.AlertType.INFORMATION, "Kuis Selesai!", 
                     "Skor Anda: " + skor + "/" + soalUntukKuis.size() + "\nAnda mendapatkan " + expDidapat + " EXP.");
                 buatCatatanDanLanjut(siklus, "Kuis (Skor: " + skor + ")");
@@ -238,6 +279,9 @@ public class MainMenuController {
         }
     }
     private void buatCatatanDanLanjut(SiklusMingguan siklus, String deskripsiAktivitas) {
+        // Cek apakah ada level up sebelum maju ke hari berikutnya
+        int levelSebelum = penggunaSaatIni.getLevel();
+        
         String namaProgram = siklus.getNamaProgram();
         int hariKe = siklus.getHariSaatIniIndex() + 1;
         
@@ -245,6 +289,12 @@ public class MainMenuController {
         penggunaSaatIni.getRiwayat().tambahkanCatatan(catatan);
 
         siklus.majuKeHariBerikutnya();
+        
+        // Perbarui UI dan cek level up
+        updateProfileUI(); 
+        if(penggunaSaatIni.getLevel() > levelSebelum) {
+            popAnimation(levelLabel); // Animasi Level Up
+        }
         updateProgramPane();
     }
     @FXML private void handleCreateProgram() {
@@ -279,7 +329,6 @@ public class MainMenuController {
         return result.map(OtotKhusus::new).orElse(null);
     }
     
-    // === METODE DIPERBARUI UNTUK MENGGUNAKAN TIPE ALERT YANG BERBEDA ===
     private void prosesPemberianBadge(SiklusMingguan siklusSelesai) {
         String namaProgram = siklusSelesai.getNamaProgram();
         String badgeBaru = null;
@@ -292,14 +341,15 @@ public class MainMenuController {
 
         if (badgeBaru != null) {
             penggunaSaatIni.setBadge(badgeBaru);
-            penggunaSaatIni.addExp(250);
-            // Menggunakan AlertType.INFORMATION yang hanya punya tombol OK
+            penggunaSaatIni.addExp(250); popAnimation(expLabel);
             showAlert(Alert.AlertType.INFORMATION, "PROGRAM SELESAI!", "Luar biasa! Anda telah menyelesaikan program: " + namaProgram + "\n" + "Anda mendapatkan badge baru: \"" + badgeBaru + "\" dan bonus 250 EXP!");
+            popAnimation(badgeLabel); // Animasi badge baru
         } else {
             showAlert(Alert.AlertType.INFORMATION, "Program Selesai", "Selamat, Anda telah menyelesaikan program " + namaProgram + "!");
         }
     }
     
+    // === METODE DIPERBARUI DENGAN ANIMASI ===
     private void loadHistoryData() {
         historyContainer.getChildren().clear();
         List<CatatanLatihan> historyList = penggunaSaatIni.getRiwayat().getDaftarCatatan();
@@ -311,9 +361,26 @@ public class MainMenuController {
             emptyLabel.getStyleClass().add("rest-day-label");
             historyContainer.getChildren().add(emptyLabel);
         } else {
-            for (CatatanLatihan catatan : historyList) {
-                historyContainer.getChildren().add(createHistoryCard(catatan));
+            SequentialTransition sequentialTransition = new SequentialTransition();
+            for (int i = 0; i < historyList.size(); i++) {
+                Node card = createHistoryCard(historyList.get(i));
+                card.setOpacity(0); // Sembunyikan kartu awalnya
+                historyContainer.getChildren().add(card);
+                
+                // Animasi fade in dan slide in dari bawah
+                FadeTransition ft = new FadeTransition(Duration.millis(400), card);
+                ft.setFromValue(0);
+                ft.setToValue(1);
+
+                TranslateTransition tt = new TranslateTransition(Duration.millis(400), card);
+                tt.setFromY(50); // Mulai dari 50px di bawah
+                tt.setToY(0);
+                
+                ParallelTransition pt = new ParallelTransition(ft, tt);
+                pt.setDelay(Duration.millis(i * 100)); // Delay agar muncul satu per satu
+                sequentialTransition.getChildren().add(pt);
             }
+            sequentialTransition.play();
         }
     }
     
