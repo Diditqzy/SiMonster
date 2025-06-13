@@ -1,142 +1,74 @@
-.root {
-    /* Menggunakan font yang modern dan mudah dibaca */
-    -fx-font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-}
+.root { -fx-font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; }
+.title-label { -fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #690B22; }
+.pane-title { -fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #444444; }
+.dashboard-welcome-text { -fx-font-size: 38px; -fx-font-weight: bold; -fx-text-fill: #333; }
+.dashboard-subtitle-text { -fx-font-size: 16px; -fx-text-fill: #666; }
+.text-field { -fx-font-size: 14px; -fx-pref-height: 40px; -fx-border-color: #d0d0d0; -fx-border-width: 1.5px; -fx-border-radius: 5px; -fx-background-radius: 5px; }
+.text-field:focused { -fx-border-color: #690B22; -fx-effect: dropshadow(gaussian, rgba(105, 11, 34, 0.3), 5, 0, 0, 0); }
+.button-primary { -fx-background-color: #690B22; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 5px; -fx-pref-height: 40px; }
+.button-primary:hover { -fx-background-color: #84142D; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 1); }
+.sidebar { -fx-background-color: #212121; }
+.sidebar-label { -fx-font-size: 13px; -fx-text-fill: #c7c7c7; }
+.sidebar-label-bold { -fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #ffffff; }
+.sidebar-button { -fx-background-color: transparent; -fx-text-fill: #dcdcdc; -fx-font-size: 14px; -fx-alignment: center-left; -fx-padding: 0 0 0 30px; -fx-background-radius: 0; -fx-graphic-text-gap: 15; }
+.sidebar-button:hover { -fx-background-color: #333333; -fx-text-fill: white; -fx-cursor: hand; }
+.sidebar-button-logout { -fx-background-color: transparent; -fx-text-fill: #e0e0e0; -fx-font-size: 14px; -fx-font-weight: bold; -fx-alignment: center-left; -fx-padding: 0 0 0 30px; -fx-border-color: #690B22; -fx-border-width: 2px 0 0 0; -fx-graphic-text-gap: 15; }
+.sidebar-button-logout:hover { -fx-background-color: #690B22; -fx-text-fill: white; -fx-cursor: hand; }
+.glyph-icon { -fx-fill: #dcdcdc; }
+.sidebar-button:hover .glyph-icon { -fx-fill: white; }
+.sidebar-button-logout:hover .glyph-icon { -fx-fill: white; }
+.main-bg { -fx-background-color: #f7f7f7; }
+.auth-box { -fx-background-color: white; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 15, 0, 0, 2); }
+.hyperlink { -fx-text-fill: #555555; }
+.hyperlink:hover { -fx-text-fill: #690B22; }
+.dialog-pane { -fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-width: 1px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 15, 0, 0, 0); }
+.dialog-pane > .content.label { -fx-padding: 0.5em 0.5em 0.5em 0.5em; -fx-background-color: transparent; -fx-font-size: 14px; -fx-text-fill: #333333; }
+.dialog-pane > .header-panel { -fx-background-color: #690B22; }
+.dialog-pane > .header-panel > .label { -fx-background-color: transparent; -fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white; }
+.dialog-pane .button{ -fx-background-color: #690B22; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 3px; -fx-pref-height: 35px; -fx-min-width: 80px; }
+.dialog-pane .button:hover{ -fx-background-color: #84142D; -fx-cursor: hand; }
+.choice-box { -fx-background-color: white; -fx-mark-color: #690B22; -fx-border-color: #cccccc; -fx-border-radius: 3px; -fx-font-size: 14px; }
+.choice-box .context-menu { -fx-background-color: white; }
+.choice-box .menu-item:focused { -fx-background-color: #690B22; -fx-text-fill: white; }
+.quiz-dialog .radio-button .radio { -fx-border-width: 2px; -fx-border-color: #690B22; -fx-background-color: white; }
+.quiz-dialog .radio-button:selected .radio .dot { -fx-background-color: #690B22; }
+.program-details-pane { -fx-background-color: white; -fx-padding: 20px; -fx-background-radius: 8px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 1); -fx-spacing: 15px; }
+.program-title-label { -fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333; }
+.program-day-label { -fx-font-size: 14px; -fx-text-fill: #690B22; -fx-font-weight: bold; }
+.task-list-header { -fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #555; -fx-border-color: #eeeeee; -fx-border-width: 0 0 1px 0; -fx-padding: 0 0 5px 0; }
+.task-item-icon { -fx-fill: #690B22; }
+.task-item-label { -fx-font-size: 15px; -fx-text-fill: #333; }
+.rest-day-label { -fx-font-size: 15px; -fx-text-fill: #444; -fx-font-style: italic; }
+.task-scroll-pane { -fx-background-color: transparent; -fx-background: transparent; }
+.task-scroll-pane .viewport { -fx-background-color: transparent; }
+.task-item-box { -fx-alignment: center-left; }
+.task-item-reps-label { -fx-font-size: 13px; -fx-text-fill: #666666; -fx-font-weight: bold; -fx-padding: 0 5px 0 0; }
 
-/* === JUDUL UTAMA === */
-.title-label {
-    -fx-font-size: 28px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #690B22; /* Warna maroon untuk judul utama */
-}
-
-.pane-title {
-    -fx-font-size: 24px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #444444; /* Warna abu-abu gelap untuk sub-judul */
-}
-
-/* === FORM INPUT (LOGIN & REGISTRASI) === */
-.text-field {
-    -fx-font-size: 14px;
-    -fx-pref-height: 40px;
-    -fx-border-color: #d0d0d0;
-    -fx-border-width: 1.5px;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
-}
-
-.text-field:focused {
-    -fx-border-color: #690B22; /* Border maroon saat di-klik */
-    -fx-effect: dropshadow(gaussian, rgba(105, 11, 34, 0.3), 5, 0, 0, 0);
-}
-
-/* === TOMBOL UTAMA === */
-.button-primary {
-    -fx-background-color: #690B22; /* Warna maroon */
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-background-radius: 5px;
-    -fx-pref-height: 40px;
-}
-
-.button-primary:hover {
-    -fx-background-color: #84142D; /* Warna maroon lebih cerah saat hover */
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 1);
-}
-
-/* === SIDEBAR (MENU UTAMA) === */
-.sidebar {
-    -fx-background-color: #212121; /* Latar belakang abu-abu sangat gelap */
-}
-
-.sidebar-label {
-    -fx-font-size: 13px;
-    -fx-text-fill: #c7c7c7; /* Warna teks abu-abu terang */
-}
-
-.sidebar-label-bold {
-    -fx-font-weight: bold;
-    -fx-font-size: 16px;
-    -fx-text-fill: #ffffff; /* Warna teks putih */
-}
-
-.sidebar-button {
+/* === STYLING BARU UNTUK RIWAYAT LATIHAN === */
+.history-scroll-pane {
+    -fx-background: transparent;
     -fx-background-color: transparent;
-    -fx-text-fill: #dcdcdc;
-    -fx-font-size: 14px;
-    -fx-alignment: center-left;
-    -fx-padding: 0 0 0 20px;
-    -fx-background-radius: 0;
 }
 
-.sidebar-button:hover {
-    -fx-background-color: #333333; /* Warna hover sedikit lebih terang */
-    -fx-text-fill: white;
-    -fx-cursor: hand;
-}
-
-.sidebar-button-logout {
-    -fx-background-color: transparent;
-    -fx-text-fill: #e0e0e0;
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-alignment: center;
-    -fx-border-color: #690B22;
-    -fx-border-width: 2px 0 0 0; /* Garis atas sebagai pemisah */
-}
-
-.sidebar-button-logout:hover {
-    -fx-background-color: #690B22;
-    -fx-text-fill: white;
-    -fx-cursor: hand;
-}
-
-/* === AREA KONTEN LAINNYA === */
-.main-bg {
-    -fx-background-color: #f7f7f7; /* Latar belakang utama off-white */
-}
-
-/* Styling untuk VBox di Login dan Register */
-.auth-box {
+.history-card {
     -fx-background-color: white;
-    -fx-background-radius: 10px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 15, 0, 0, 2);
+    -fx-padding: 15px;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 1);
 }
 
-/* Styling untuk TableView di Riwayat */
-.table-view .column-header-background {
-    -fx-background-color: #690B22;
-}
-
-.table-view .column-header .label {
-    -fx-text-fill: white;
+.history-date {
+    -fx-font-size: 14px;
     -fx-font-weight: bold;
+    -fx-text-fill: #690B22;
 }
 
-.table-view .table-cell {
-    -fx-border-color: transparent;
-    -fx-padding: 5px;
-}
-
-.table-row-cell:odd{
-    -fx-background-color: #ffffff;
-}
-.table-row-cell:even{
-    -fx-background-color: #f7f7f7;
-}
-
-.table-row-cell:hover {
-    -fx-background-color: #e8e8e8;
-}
-
-/* Styling untuk hyperlink */
-.hyperlink {
+.history-program {
+    -fx-font-size: 13px;
     -fx-text-fill: #555555;
 }
 
-.hyperlink:hover {
-    -fx-text-fill: #690B22;
+.history-details {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
 }

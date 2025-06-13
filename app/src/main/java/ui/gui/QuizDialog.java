@@ -2,7 +2,6 @@ package ui.gui;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.soal.Soal;
 
@@ -21,40 +20,61 @@ public class QuizDialog extends Dialog<Integer> {
     public QuizDialog(List<Soal> soalList) {
         this.soalList = soalList;
 
+        // Menerapkan style ke dialog
+        DialogPane dialogPane = getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
+        dialogPane.getStyleClass().add("dialog-pane");
+        dialogPane.getStyleClass().add("quiz-dialog"); // Class khusus untuk kuis
+        
         setTitle("Sesi Kuis Hari Istirahat");
-        setHeaderText("Jawab pertanyaan berikut untuk mendapatkan EXP tambahan!");
+        setHeaderText("Jawab pertanyaan berikut!");
 
         setupUI();
         displaySoal();
 
-        // Mengatur hasil dialog. Hasilnya adalah skor (Integer).
         setResultConverter(dialogButton -> {
-            if (dialogButton == ButtonType.FINISH) {
+            if (dialogButton.getButtonData() == ButtonBar.ButtonData.OK_DONE) {
                 return skor;
             }
-            return null;
+            return null; // Jika dibatalkan
         });
     }
 
     private void setupUI() {
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
-
         soalLabel = new Label();
         soalLabel.setWrapText(true);
-        soalLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
+        soalLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #333;");
 
         pilihanGroup = new ToggleGroup();
         pilihanBox = new VBox(10); // Spasi 10px antar pilihan
 
-        nextButton = new Button("Selanjutnya");
-        nextButton.setOnAction(e -> handleNextButton());
-        
-        VBox mainLayout = new VBox(20, soalLabel, pilihanBox, nextButton);
+        VBox mainLayout = new VBox(20, soalLabel, pilihanBox);
+        mainLayout.setPadding(new Insets(10));
         getDialogPane().setContent(mainLayout);
-        getDialogPane().getButtonTypes().add(ButtonType.CANCEL); // Tombol untuk batal
+
+        // Mengatur tombol-tombol
+        ButtonType nextButtonType = new ButtonType("Selanjutnya", ButtonBar.ButtonData.OK_DONE);
+        getDialogPane().getButtonTypes().addAll(nextButtonType, ButtonType.CANCEL);
+
+        final Button nextBtn = (Button) getDialogPane().lookupButton(nextButtonType);
+        nextBtn.addEventFilter(javafx.event.ActionEvent.ACTION, event -> {
+            // Logika ini dijalankan SEBELUM dialog ditutup
+            RadioButton selectedRadioButton = (RadioButton) pilihanGroup.getSelectedToggle();
+            if (selectedRadioButton == null) {
+                showAlert(Alert.AlertType.WARNING, "Pilihan Kosong", "Pilih salah satu jawaban!");
+                event.consume(); // Mencegah dialog tertutup
+                return;
+            }
+            handleAnswer(selectedRadioButton.getText());
+            
+            if (currentSoalIndex < soalList.size()) {
+                displaySoal();
+                event.consume(); // Mencegah dialog tertutup karena masih ada soal
+            } else {
+                // Kuis selesai, biarkan dialog tertutup
+                nextBtn.setText("Selesai");
+            }
+        });
     }
 
     private void displaySoal() {
@@ -62,49 +82,40 @@ public class QuizDialog extends Dialog<Integer> {
         soalLabel.setText("Soal " + (currentSoalIndex + 1) + ": " + soal.getPertanyaan());
 
         pilihanBox.getChildren().clear();
-        soal.getPilihanJawaban().forEach(pilihan -> {
-            RadioButton rb = new RadioButton(pilihan);
+        pilihanGroup.selectToggle(null); // Reset pilihan
+        
+        char optionChar = 'a';
+        for (String pilihan : soal.getPilihanJawaban()) {
+            RadioButton rb = new RadioButton(optionChar + ". " + pilihan);
+            rb.setUserData(String.valueOf(optionChar)); // Simpan 'a', 'b', 'c' sebagai data
             rb.setToggleGroup(pilihanGroup);
             pilihanBox.getChildren().add(rb);
-        });
-
-        if (currentSoalIndex == soalList.size() - 1) {
-            nextButton.setText("Selesai");
+            optionChar++;
         }
     }
-
-    private void handleNextButton() {
+    
+    private void handleAnswer(String selectedText) {
         RadioButton selectedRadioButton = (RadioButton) pilihanGroup.getSelectedToggle();
-        if (selectedRadioButton == null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Pilih salah satu jawaban!");
-            alert.showAndWait();
-            return;
-        }
-
-        Soal soal = soalList.get(currentSoalIndex);
-        String jawabanPengguna = getJawabanFromText(selectedRadioButton.getText());
+        String jawabanPengguna = (String) selectedRadioButton.getUserData();
         
+        Soal soal = soalList.get(currentSoalIndex);
         if (soal.cekJawaban(jawabanPengguna)) {
             skor++;
         }
-
         currentSoalIndex++;
-        if (currentSoalIndex < soalList.size()) {
-            displaySoal();
-        } else {
-            // Jika kuis selesai
-            setResult(skor);
-            close();
-        }
     }
 
-    // Helper untuk mengubah jawaban dari "a. Teks Jawaban" menjadi "a"
-    private String getJawabanFromText(String text) {
-        // Logika ini disesuaikan dengan format soal dan jawaban Anda
-        // Diasumsikan jawaban adalah huruf pertama (a, b, c)
-        if (text != null && text.length() > 1 && text.charAt(1) == '.') {
-            return String.valueOf(text.charAt(0));
-        }
-        return text; // Fallback
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        styleDialog(alert.getDialogPane());
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    
+    private void styleDialog(DialogPane dialogPane) {
+        dialogPane.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
+        dialogPane.getStyleClass().add("dialog-pane");
     }
 }

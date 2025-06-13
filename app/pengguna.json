@@ -1,114 +1,87 @@
 {
-  "Ditqzy": {
+  "D": {
     "password": "Didit123",
-    "nama": "Didit Iqbal",
-    "level": 4,
-    "exp": 357,
-    "badge": "Puncak Herkules",
-    "siklusProgram": "Lower Body",
+    "nama": "DIDIT IQBAL ALFARUZY",
+    "level": 3,
+    "exp": 156,
+    "badge": "Tapal Kuda",
+    "riwayat": [
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "One Arm Triceps Extension, Close Grip Incline Push Up, Triceps Isometric Push",
+        "hariKe": 7,
+        "namaProgram": "Otot Khusus (Trisep)"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Kuis (Skor: 2)",
+        "hariKe": 6,
+        "namaProgram": "Otot Khusus (Trisep)"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Chair Dip (kaki lurus), Overhead Triceps Press, Wall Triceps Hold",
+        "hariKe": 5,
+        "namaProgram": "Otot Khusus (Trisep)"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Kuis (Skor: 2)",
+        "hariKe": 4,
+        "namaProgram": "Otot Khusus (Trisep)"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Diamond Wall Push Up, Triceps Kickback (botol), Close-Grip Push Up (lutut)",
+        "hariKe": 3,
+        "namaProgram": "Otot Khusus (Trisep)"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Kuis (Skor: 2)",
+        "hariKe": 2,
+        "namaProgram": "Otot Khusus (Trisep)"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Wall Triceps Extension, Bench Dip (kursi), Overhead Extension (botol)",
+        "hariKe": 1,
+        "namaProgram": "Otot Khusus (Trisep)"
+      }
+    ]
+  },
+  "F": {
+    "password": "Didit123",
+    "nama": "Did",
+    "level": 1,
+    "exp": 88,
+    "badge": "Pemula",
+    "siklusProgram": "Full Body",
     "siklusHariKe": 4,
     "riwayat": [
       {
         "tanggal": "14-06-2025",
-        "daftarLatihan": "Isometric Bicep Hold, Towel Curl, Negative Curl",
+        "daftarLatihan": "Burpees, Pull Up, Kettlebell Swing, Mountain Climber, Plank",
         "hariKe": 1,
-        "namaProgram": "Otot Khusus (Bisep)"
+        "namaProgram": "Full Body"
       },
       {
         "tanggal": "14-06-2025",
-        "daftarLatihan": "Kuis Pengetahuan Fitness",
+        "daftarLatihan": "Istirahat penuh",
         "hariKe": 2,
-        "namaProgram": "Otot Khusus (Bisep)"
+        "namaProgram": "Full Body"
       },
       {
         "tanggal": "14-06-2025",
-        "daftarLatihan": "Isometric Wall Curl, Lying Bicep Curl (tas), Hammer Curl (handuk)",
+        "daftarLatihan": "Man Maker, Jumping Lunges, Renegade Row, Hanging Knee Raise, Bear Crawl",
         "hariKe": 3,
-        "namaProgram": "Otot Khusus (Bisep)"
+        "namaProgram": "Full Body"
       },
       {
         "tanggal": "14-06-2025",
-        "daftarLatihan": "Kuis Pengetahuan Fitness",
+        "daftarLatihan": "Istirahat penuh",
         "hariKe": 4,
-        "namaProgram": "Otot Khusus (Bisep)"
-      },
-      {
-        "tanggal": "14-06-2025",
-        "daftarLatihan": "Concentration Curl (tas), Eccentric Towel Curl, Tempo Curl",
-        "hariKe": 5,
-        "namaProgram": "Otot Khusus (Bisep)"
-      },
-      {
-        "tanggal": "14-06-2025",
-        "daftarLatihan": "Kuis Pengetahuan Fitness",
-        "hariKe": 6,
-        "namaProgram": "Otot Khusus (Bisep)"
-      },
-      {
-        "tanggal": "14-06-2025",
-        "daftarLatihan": "Zottman Curl (handuk), Weighted Hammer Curl, Towel Twist Hold",
-        "hariKe": 7,
-        "namaProgram": "Otot Khusus (Bisep)"
-      },
-      {
-        "tanggal": "14-06-2025",
-        "daftarLatihan": "Push Up, Incline Push Up, Dips, Plank Shoulder Tap, Wall Walk",
-        "hariKe": 1,
-        "namaProgram": "Upper Body"
-      },
-      {
-        "tanggal": "14-06-2025",
-        "daftarLatihan": "Kuis Pengetahuan Fitness",
-        "hariKe": 2,
-        "namaProgram": "Upper Body"
-      },
-      {
-        "tanggal": "14-06-2025",
-        "daftarLatihan": "Archer Push Up, Diamond Push Up, Pike Push Up, Side Plank Reach Under",
-        "hariKe": 3,
-        "namaProgram": "Upper Body"
-      },
-      {
-        "tanggal": "14-06-2025",
-        "daftarLatihan": "Kuis Pengetahuan Fitness",
-        "hariKe": 4,
-        "namaProgram": "Upper Body"
-      },
-      {
-        "tanggal": "14-06-2025",
-        "daftarLatihan": "One-Arm Push Up (assisted), Decline Push Up, Handstand Push Up (wall)",
-        "hariKe": 5,
-        "namaProgram": "Upper Body"
-      },
-      {
-        "tanggal": "14-06-2025",
-        "daftarLatihan": "Clap Push Up, Weighted Dips (5kg), Planche Lean Hold",
-        "hariKe": 7,
-        "namaProgram": "Upper Body"
-      },
-      {
-        "tanggal": "14-06-2025",
-        "daftarLatihan": "Squat, Lunges, Calf Raise, Glute Bridge",
-        "hariKe": 1,
-        "namaProgram": "Lower Body"
-      },
-      {
-        "tanggal": "14-06-2025",
-        "daftarLatihan": "Kuis (Skor: 0)",
-        "hariKe": 2,
-        "namaProgram": "Lower Body"
-      },
-      {
-        "tanggal": "14-06-2025",
-        "daftarLatihan": "Bulgarian Split Squat, Jump Squat, Single-Leg Deadlift",
-        "hariKe": 3,
-        "namaProgram": "Lower Body"
-      },
-      {
-        "tanggal": "14-06-2025",
-        "daftarLatihan": "Kuis (Skor: 0)",
-        "hariKe": 4,
-        "namaProgram": "Lower Body"
+        "namaProgram": "Full Body"
       }
     ]
   }
