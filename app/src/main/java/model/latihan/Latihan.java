@@ -17,6 +17,9 @@ public class Latihan {
 
     public String getNamaLatihan() { return namaLatihan; }
     public int getExp() { return exp; }
+    
+    public int getSet() { return set; }
+    public String getRep() { return rep; }
 
     public void doLatihan() {
         System.out.printf("--> %-35s | %d set x %-12s || %d exp\n", namaLatihan, set, rep, exp);
