@@ -6,13 +6,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.gui.LoginController">
+<VBox alignment="CENTER" spacing="20.0" styleClass="main-bg" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.gui.LoginController">
    <children>
-      <VBox alignment="CENTER" maxWidth="350.0" spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 10;" VBox.vgrow="NEVER">
+      <VBox alignment="CENTER" maxWidth="350.0" spacing="15.0" styleClass="auth-box" VBox.vgrow="NEVER">
          <children>
             <Label styleClass="title-label" text="SIMONSTER" />
             <Label text="Silakan login untuk melanjutkan" />
@@ -33,11 +31,8 @@
          <padding>
             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
          </padding>
-         <effect>
-            <DropShadow color="#00000026" radius="10.0" />
-         </effect>
       </VBox>
-      <Hyperlink fx:id="registerLink" onAction="#handleRegisterLink" text="Belum punya akun? Buat di sini" />
+      <Hyperlink fx:id="registerLink" onAction="#handleRegisterLink" styleClass="hyperlink" text="Belum punya akun? Buat di sini" />
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

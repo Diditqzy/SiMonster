@@ -17,20 +17,36 @@ public class MainApp extends Application {
     private Stage primaryStage;
     private static Map<String, Pengguna> basisDataPengguna;
 
+    // Variabel untuk menyimpan ukuran jendela terakhir
+    private double lastWidth = 800;  // Ukuran default awal untuk menu utama
+    private double lastHeight = 600; // Ukuran default awal untuk menu utama
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
 
-        // Muat data pengguna dari file saat aplikasi dimulai
         basisDataPengguna = ManajemenData.muatDataPengguna();
 
         primaryStage.setTitle("SIMONSTER - Aplikasi Fitness");
-        showLoginView(); // Tampilkan layar login pertama kali
+        showLoginView();
         primaryStage.show();
+
+        // Tambahkan listener untuk mendeteksi perubahan ukuran jendela oleh pengguna
+        primaryStage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            if (!primaryStage.isMaximized()) {
+                lastWidth = newVal.doubleValue();
+            }
+        });
+        primaryStage.heightProperty().addListener((obs, oldVal, newVal) -> {
+            if (!primaryStage.isMaximized()) {
+                lastHeight = newVal.doubleValue();
+            }
+        });
     }
 
     /**
-     * Menampilkan layar login.
+     * Menampilkan layar login. Jendela akan secara otomatis menyesuaikan
+     * ukurannya agar pas dengan konten login yang kecil.
      */
     public void showLoginView() throws IOException {
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/fxml/LoginView.fxml")));
@@ -41,6 +57,10 @@ public class MainApp extends Application {
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
+
+        // Biarkan jendela menyesuaikan ukurannya untuk scene login
+        primaryStage.sizeToScene();
+        primaryStage.centerOnScreen();
     }
 
     /**
@@ -53,13 +73,14 @@ public class MainApp extends Application {
         RegisterController controller = loader.getController();
         controller.setMainApp(this, basisDataPengguna);
 
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
+        primaryStage.setScene(new Scene(root));
+        primaryStage.sizeToScene();
+        primaryStage.centerOnScreen();
     }
 
     /**
-     * Menampilkan dashboard utama setelah login berhasil.
-     * @param pengguna Pengguna yang sedang login.
+     * Menampilkan dashboard utama. Ukuran jendela akan diatur ke ukuran
+     * terakhir yang disimpan.
      */
     public void showMainMenuView(Pengguna pengguna) throws IOException {
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/fxml/MainMenuView.fxml")));
@@ -70,17 +91,18 @@ public class MainApp extends Application {
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
+
+        // Terapkan ukuran yang tersimpan saat pindah ke menu utama
+        primaryStage.setWidth(lastWidth);
+        primaryStage.setHeight(lastHeight);
+        primaryStage.centerOnScreen();
     }
 
 
-    /**
-     * Menyimpan data pengguna saat aplikasi ditutup.
-     */
     @Override
     public void stop() throws Exception {
         System.out.println("Menyimpan semua data sebelum keluar...");
         ManajemenData.simpanDataPengguna(basisDataPengguna);
-        System.out.println("Data berhasil disimpan. Sampai jumpa!");
     }
 
     public static void main(String[] args) {
