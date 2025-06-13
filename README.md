@@ -2,7 +2,7 @@
 SiMonster adalah aplikasi kebugaran (fitness) berbasis java yang dirancang untuk mengubah cara pengguna berolahraga menjadi sebuah petualangan yang progresif dan termotivasi. Aplikasi ini memandu pengguna melalui berbagai program latihan yang terstruktur dalam siklus mingguan, lengkap dengan sistem gamifikasi untuk menjaga semangat dan memantau kemajuan.
 
 Nama "SiMonster" merepresentasikan kekuatan dalam diri pengguna yang akan terus "tumbuh" dan menjadi lebih kuat seiring dengan progres latihan yang diselesaikan. Tujuan utamanya adalah membuat aktivitas kebugaran menjadi lebih menarik, terukur, dan konsisten.
---
+
 ## 💾Fitur Utama
 
 - *Sistem Pengguna:* Registrasi dan Login untuk menyimpan progres secara personal.
