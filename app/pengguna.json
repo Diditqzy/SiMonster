@@ -1,0 +1,73 @@
+{
+  "Ditqzy": {
+    "password": "Didit123",
+    "nama": "Didit Iqbal",
+    "level": 3,
+    "exp": 254,
+    "badge": "Popeye",
+    "siklusProgram": "Upper Body",
+    "siklusHariKe": 3,
+    "riwayat": [
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Isometric Bicep Hold, Towel Curl, Negative Curl",
+        "hariKe": 1,
+        "namaProgram": "Otot Khusus (Bisep)"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Kuis Pengetahuan Fitness",
+        "hariKe": 2,
+        "namaProgram": "Otot Khusus (Bisep)"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Isometric Wall Curl, Lying Bicep Curl (tas), Hammer Curl (handuk)",
+        "hariKe": 3,
+        "namaProgram": "Otot Khusus (Bisep)"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Kuis Pengetahuan Fitness",
+        "hariKe": 4,
+        "namaProgram": "Otot Khusus (Bisep)"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Concentration Curl (tas), Eccentric Towel Curl, Tempo Curl",
+        "hariKe": 5,
+        "namaProgram": "Otot Khusus (Bisep)"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Kuis Pengetahuan Fitness",
+        "hariKe": 6,
+        "namaProgram": "Otot Khusus (Bisep)"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Zottman Curl (handuk), Weighted Hammer Curl, Towel Twist Hold",
+        "hariKe": 7,
+        "namaProgram": "Otot Khusus (Bisep)"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Push Up, Incline Push Up, Dips, Plank Shoulder Tap, Wall Walk",
+        "hariKe": 1,
+        "namaProgram": "Upper Body"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Kuis Pengetahuan Fitness",
+        "hariKe": 2,
+        "namaProgram": "Upper Body"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Archer Push Up, Diamond Push Up, Pike Push Up, Side Plank Reach Under",
+        "hariKe": 3,
+        "namaProgram": "Upper Body"
+      }
+    ]
+  }
+}
