@@ -66,43 +66,39 @@ Berikut adalah visualisasi struktur package dan kelas utama dalam proyek ini:
 
 SiMonster/
 └── src/main/
-├── java/
-│   ├── data/
-│   │   └── ManajemenData.java        # Mengelola simpan/muat data ke file JSON.
-│   ├── model/
-│   │   ├── latihan/
-│   │   │   ├── ProgramLatihan.java   # Abstract class untuk semua program.
-│   │   │   ├── FullBody.java       # Turunan ProgramLatihan.
-│   │   │   ├── UpperBody.java      # Turunan ProgramLatihan.
-│   │   │   ├── LowerBody.java      # Turunan ProgramLatihan.
-│   │   │   ├── OtotKhusus.java     # Turunan ProgramLatihan.
-│   │   │   ├── SiklusMingguan.java   # Mengelola jadwal 7 hari.
-│   │   │   ├── AktivitasHarian.java  # Interface untuk aktivitas harian.
-│   │   │   ├── HariBertarung.java    # Implementasi AktivitasHarian.
-│   │   │   ├── HariIstirahat.java    # Implementasi AktivitasHarian.
-│   │   │   └── Latihan.java          # Entitas untuk satu jenis latihan.
-│   │   ├── soal/
-│   │   │   ├── BankSoal.java         # Penyedia soal untuk kuis.
-│   │   │   ├── SesiSoal.java         # Mengelola sesi kuis (versi konsol).
-│   │   │   └── Soal.java             # Entitas untuk satu soal.
-│   │   └── user/
-│   │       ├── Pengguna.java         # Entitas utama pengguna.
-│   │       ├── CatatanLatihan.java   # Entitas untuk satu catatan riwayat.
-│   │       └── RiwayatLatihan.java   # Mengelola kumpulan catatan riwayat.
-│   └── ui/
-│       └── gui/
-│           ├── MainApp.java          # Titik masuk aplikasi JavaFX.
-│           ├── LoginController.java    # Logika untuk layar login.
-│           ├── MainMenuController.java # Logika untuk dashboard utama.
-│           ├── RegisterController.java # Logika untuk layar registrasi.
-│           └── QuizDialog.java       # Logika untuk pop-up kuis.
-└── resources/
-├── fxml/                         # File desain antarmuka.
-├── styles/                       # File CSS untuk styling.
-└── pengguna.json                 # File database.
-
-
----
+    ├── java/
+    │   ├── data/
+    │   │   └── ManajemenData.java
+    │   ├── model/
+    │   │   ├── latihan/
+    │   │   │   ├── ProgramLatihan.java
+    │   │   │   ├── FullBody.java
+    │   │   │   ├── UpperBody.java
+    │   │   │   ├── LowerBody.java
+    │   │   │   ├── OtotKhusus.java
+    │   │   │   ├── SiklusMingguan.java
+    │   │   │   ├── AktivitasHarian.java
+    │   │   │   ├── HariBertarung.java
+    │   │   │   ├── HariIstirahat.java
+    │   │   │   └── Latihan.java
+    │   │   ├── soal/
+    │   │   │   ├── BankSoal.java
+    │   │   │   ├── SesiSoal.java
+    │   │   │   └── Soal.java
+    │   │   └── user/
+    │   │       ├── Pengguna.java
+    │   │       ├── CatatanLatihan.java
+    │   │       └── RiwayatLatihan.java
+    │   └── ui/gui/
+    │       ├── MainApp.java
+    │       ├── LoginController.java
+    │       ├── MainMenuController.java
+    │       ├── RegisterController.java
+    │       └── QuizDialog.java
+    └── resources/
+        ├── fxml/
+        ├── styles/
+        └── pengguna.json
 
 ## 🚀 Teknologi & Kebutuhan
 
