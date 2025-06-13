@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" spacing="20.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.gui.LoginController">
+<VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.gui.LoginController">
    <children>
-      <VBox alignment="CENTER" prefHeight="280.0" prefWidth="300.0" spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+      <VBox alignment="CENTER" maxWidth="350.0" spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 10;" VBox.vgrow="NEVER">
          <children>
             <Label styleClass="title-label" text="SIMONSTER" />
             <Label text="Silakan login untuk melanjutkan" />
@@ -28,7 +28,7 @@
                   <PasswordField fx:id="passwordField" promptText="Masukkan password" styleClass="text-field" />
                </children>
             </VBox>
-            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLogin" prefHeight="40.0" prefWidth="250.0" styleClass="button-primary" text="Login" />
+            <Button fx:id="loginButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogin" prefHeight="40.0" styleClass="button-primary" text="Login" />
          </children>
          <padding>
             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />

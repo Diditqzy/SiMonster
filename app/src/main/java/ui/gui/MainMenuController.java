@@ -8,13 +8,18 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import model.latihan.*;
+import model.soal.BankSoal;
+import model.soal.Soal;
 import model.user.CatatanLatihan;
 import model.user.Pengguna;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 
 public class MainMenuController {
 
@@ -22,6 +27,7 @@ public class MainMenuController {
     private Pengguna penggunaSaatIni;
     private Map<String, Pengguna> basisDataPengguna;
 
+    // ... (Variabel @FXML lainnya tetap sama) ...
     @FXML private Label welcomeLabel;
     @FXML private Label levelLabel;
     @FXML private Label expLabel;
@@ -52,9 +58,10 @@ public class MainMenuController {
         updateProgramPane();
         setupHistoryTable();
         
-        showDashboard(); // Tampilkan dashboard sebagai default
+        showDashboard();
     }
 
+    // ... (Metode updateProfileUI, handleLogout, navigasi pane tetap sama) ...
     private void updateProfileUI() {
         welcomeLabel.setText("Halo, " + penggunaSaatIni.getNama() + "!");
         levelLabel.setText("Level: " + penggunaSaatIni.getLevel());
@@ -72,7 +79,6 @@ public class MainMenuController {
         }
     }
     
-    // --- Navigasi Pane ---
     @FXML private void showDashboard() {
         dashboardPane.setVisible(true);
         programPane.setVisible(false);
@@ -93,7 +99,7 @@ public class MainMenuController {
         loadHistoryData();
     }
 
-    // --- Logika Program ---
+    // --- Logika Program (Diperbarui) ---
     private void updateProgramPane() {
         SiklusMingguan siklus = penggunaSaatIni.getSiklusSaatIni();
         if (siklus == null) {
@@ -103,16 +109,27 @@ public class MainMenuController {
         } else if (siklus.isSelesai()) {
             prosesPemberianBadge(siklus);
             penggunaSaatIni.setSiklusSaatIni(null);
-            updateProgramPane(); // Refresh pane
+            updateProgramPane();
         } else {
             int hariKe = siklus.getHariSaatIniIndex() + 1;
             AktivitasHarian aktivitas = siklus.getHariSaatIni();
-            String jenisAktivitas = (aktivitas instanceof HariBertarung) ? "HARI BERTARUNG" : "HARI ISTIRAHAT (KUIS)";
             
-            programStatusArea.setText("Program Aktif: " + siklus.getNamaProgram() + "\n\n"
-                                    + "Hari ini adalah Hari ke-" + hariKe + ":\n"
-                                    + jenisAktivitas);
+            StringBuilder statusText = new StringBuilder();
+            statusText.append("Program Aktif: ").append(siklus.getNamaProgram()).append("\n\n");
+            statusText.append("Hari ini adalah Hari ke-").append(hariKe).append(":\n");
             
+            if (aktivitas instanceof HariBertarung) {
+                statusText.append("HARI BERTARUNG\n\n");
+                statusText.append("Daftar Latihan:\n");
+                ((HariBertarung) aktivitas).getDaftarLatihanHarian().forEach(latihan -> {
+                    statusText.append("- ").append(latihan.getNamaLatihan()).append("\n");
+                });
+            } else {
+                statusText.append("HARI ISTIRAHAT (KUIS)\n\n");
+                statusText.append("Gunakan hari ini untuk memulihkan tenaga dan menguji pengetahuanmu!");
+            }
+            
+            programStatusArea.setText(statusText.toString());
             doExerciseButton.setText("Mulai Aktivitas Hari ke-" + hariKe);
             doExerciseButton.setVisible(true);
             createProgramButton.setVisible(false);
@@ -123,36 +140,84 @@ public class MainMenuController {
     @FXML
     private void handleDoExercise() {
         SiklusMingguan siklus = penggunaSaatIni.getSiklusSaatIni();
-        if (siklus != null && !siklus.isSelesai()) {
-            AktivitasHarian aktivitas = siklus.getHariSaatIni();
-            
-            // Simulasi aktivitas (di GUI tidak perlu scanner)
-            // Untuk kuis dan latihan, kita hanya tampilkan pesan dan berikan EXP
-            if (aktivitas instanceof HariBertarung) {
-                // Di dunia nyata, ini akan membuka window/scene baru untuk latihan
-                int totalExp = ((HariBertarung) aktivitas).getDaftarLatihanHarian().stream().mapToInt(Latihan::getExp).sum();
-                penggunaSaatIni.addExp(totalExp);
-                showAlert(Alert.AlertType.INFORMATION, "Latihan Selesai!", "Kerja bagus! Anda mendapatkan " + totalExp + " EXP.");
-            } else if (aktivitas instanceof HariIstirahat) {
-                 // Untuk kuis, kita berikan exp rata-rata saja di GUI ini
-                penggunaSaatIni.addExp(30); // Asumsi skor kuis bagus
-                showAlert(Alert.AlertType.INFORMATION, "Kuis Selesai!", "Hebat! Otak dan otot perlu seimbang. Anda mendapatkan 30 EXP.");
-            }
-            
-            // Buat catatan latihan
-            String namaProgram = siklus.getNamaProgram();
-            int hariKe = siklus.getHariSaatIniIndex() + 1;
-            String daftarLatihanStr = (aktivitas instanceof HariBertarung) ? 
-                ((HariBertarung) aktivitas).getDaftarLatihanHarian().stream().map(Latihan::getNamaLatihan).reduce((a, b) -> a + ", " + b).orElse("")
-                : "Kuis Pengetahuan Fitness";
-            CatatanLatihan catatan = new CatatanLatihan(penggunaSaatIni.getNama(), daftarLatihanStr, hariKe, namaProgram);
-            penggunaSaatIni.getRiwayat().tambahkanCatatan(catatan);
+        if (siklus == null || siklus.isSelesai()) return;
 
-            siklus.majuKeHariBerikutnya();
-            updateProgramPane();
+        AktivitasHarian aktivitas = siklus.getHariSaatIni();
+        
+        if (aktivitas instanceof HariIstirahat) {
+            handleQuizDay(siklus);
+        } else if (aktivitas instanceof HariBertarung) {
+            handleTrainingDay(siklus, (HariBertarung) aktivitas);
         }
     }
+    
+    private void handleTrainingDay(SiklusMingguan siklus, HariBertarung aktivitas) {
+        int totalExp = aktivitas.getDaftarLatihanHarian().stream().mapToInt(Latihan::getExp).sum();
+        penggunaSaatIni.addExp(totalExp);
+        showAlert(Alert.AlertType.INFORMATION, "Latihan Selesai!", "Kerja bagus! Anda mendapatkan " + totalExp + " EXP.");
+        
+        String daftarLatihanStr = aktivitas.getDaftarLatihanHarian()
+            .stream()
+            .map(Latihan::getNamaLatihan)
+            .collect(Collectors.joining(", "));
+        buatCatatanDanLanjut(siklus, daftarLatihanStr);
+    }
+    
+    private void handleQuizDay(SiklusMingguan siklus) {
+        Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDialog.setTitle("Hari Istirahat");
+        confirmDialog.setHeaderText("Ini adalah hari istirahat. Mau mengerjakan kuis?");
+        confirmDialog.setContentText("Pilih jawaban Anda:");
 
+        ButtonType buttonTypeYes = new ButtonType("Kerjakan Kuis");
+        ButtonType buttonTypeNo = new ButtonType("Lewati Saja", ButtonBar.ButtonData.CANCEL_CLOSE);
+        confirmDialog.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
+        Optional<ButtonType> result = confirmDialog.showAndWait();
+        if (result.isPresent() && result.get() == buttonTypeYes) {
+            // Pengguna memilih mengerjakan kuis
+            int hariKe = siklus.getHariSaatIniIndex() + 1;
+            int tingkatKesulitan = (hariKe / 2);
+            List<Soal> soalUntukKuis = BankSoal.getSoal(siklus.getNamaProgram(), tingkatKesulitan, 2);
+
+            if (soalUntukKuis.isEmpty()) {
+                showAlert(Alert.AlertType.INFORMATION, "Tidak Ada Kuis", "Maaf, tidak ada kuis yang tersedia untuk program ini. Selamat beristirahat!");
+                penggunaSaatIni.addExp(10);
+                buatCatatanDanLanjut(siklus, "Istirahat (tanpa kuis)");
+                return;
+            }
+            
+            // Tampilkan dialog kuis kustom
+            QuizDialog quizDialog = new QuizDialog(soalUntukKuis);
+            Optional<Integer> quizResult = quizDialog.showAndWait();
+
+            quizResult.ifPresent(skor -> {
+                int expDidapat = skor * 15;
+                penggunaSaatIni.addExp(expDidapat);
+                showAlert(Alert.AlertType.INFORMATION, "Kuis Selesai!", 
+                    "Skor Anda: " + skor + "/" + soalUntukKuis.size() + "\nAnda mendapatkan " + expDidapat + " EXP.");
+                buatCatatanDanLanjut(siklus, "Kuis (Skor: " + skor + ")");
+            });
+
+        } else {
+            // Pengguna memilih melewati kuis
+            showAlert(Alert.AlertType.INFORMATION, "Hari Dilewati", "Anda memilih untuk beristirahat penuh hari ini.");
+            buatCatatanDanLanjut(siklus, "Istirahat penuh");
+        }
+    }
+    
+    private void buatCatatanDanLanjut(SiklusMingguan siklus, String deskripsiAktivitas) {
+        String namaProgram = siklus.getNamaProgram();
+        int hariKe = siklus.getHariSaatIniIndex() + 1;
+        
+        CatatanLatihan catatan = new CatatanLatihan(penggunaSaatIni.getNama(), deskripsiAktivitas, hariKe, namaProgram);
+        penggunaSaatIni.getRiwayat().tambahkanCatatan(catatan);
+
+        siklus.majuKeHariBerikutnya();
+        updateProgramPane();
+    }
+    
+    // ... (sisa metode seperti handleCreateProgram, prosesPemberianBadge, setupHistoryTable, dll tetap sama) ...
     @FXML
     private void handleCreateProgram() {
         ChoiceDialog<String> dialog = new ChoiceDialog<>("Full Body", "Full Body", "Upper Body", "Lower Body", "Otot Khusus");
@@ -222,10 +287,7 @@ public class MainMenuController {
         }
     }
     
-    // --- Logika Riwayat ---
     private void setupHistoryTable() {
-        // Menggunakan PropertyValueFactory untuk menautkan kolom ke properti di kelas CatatanLatihan
-        // Perhatian: Kelas CatatanLatihan perlu getter yang sesuai (getTanggal(), getDaftarLatihan(), etc.)
         tanggalColumn.setCellValueFactory(cellData -> {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             return new javafx.beans.property.SimpleStringProperty(sdf.format(cellData.getValue().getTanggal()));

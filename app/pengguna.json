@@ -2,11 +2,11 @@
   "Ditqzy": {
     "password": "Didit123",
     "nama": "Didit Iqbal",
-    "level": 3,
-    "exp": 254,
-    "badge": "Popeye",
-    "siklusProgram": "Upper Body",
-    "siklusHariKe": 3,
+    "level": 4,
+    "exp": 357,
+    "badge": "Puncak Herkules",
+    "siklusProgram": "Lower Body",
+    "siklusHariKe": 4,
     "riwayat": [
       {
         "tanggal": "14-06-2025",
@@ -67,6 +67,48 @@
         "daftarLatihan": "Archer Push Up, Diamond Push Up, Pike Push Up, Side Plank Reach Under",
         "hariKe": 3,
         "namaProgram": "Upper Body"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Kuis Pengetahuan Fitness",
+        "hariKe": 4,
+        "namaProgram": "Upper Body"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "One-Arm Push Up (assisted), Decline Push Up, Handstand Push Up (wall)",
+        "hariKe": 5,
+        "namaProgram": "Upper Body"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Clap Push Up, Weighted Dips (5kg), Planche Lean Hold",
+        "hariKe": 7,
+        "namaProgram": "Upper Body"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Squat, Lunges, Calf Raise, Glute Bridge",
+        "hariKe": 1,
+        "namaProgram": "Lower Body"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Kuis (Skor: 0)",
+        "hariKe": 2,
+        "namaProgram": "Lower Body"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Bulgarian Split Squat, Jump Squat, Single-Leg Deadlift",
+        "hariKe": 3,
+        "namaProgram": "Lower Body"
+      },
+      {
+        "tanggal": "14-06-2025",
+        "daftarLatihan": "Kuis (Skor: 0)",
+        "hariKe": 4,
+        "namaProgram": "Lower Body"
       }
     ]
   }

@@ -12,7 +12,7 @@
 
 <VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #f4f4f4;" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.gui.RegisterController">
    <children>
-      <VBox alignment="CENTER" prefHeight="350.0" prefWidth="320.0" spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+      <VBox alignment="CENTER" maxWidth="350.0" spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 10;" VBox.vgrow="NEVER">
          <children>
             <Label styleClass="title-label" text="BUAT AKUN BARU" />
             <VBox spacing="5.0">
@@ -33,7 +33,7 @@
                   <PasswordField fx:id="passwordField" promptText="Min. 8 karakter (huruf &amp; angka)" styleClass="text-field" />
                </children>
             </VBox>
-            <Button fx:id="registerButton" mnemonicParsing="false" onAction="#handleRegister" prefHeight="40.0" prefWidth="250.0" styleClass="button-primary" text="Daftar" />
+            <Button fx:id="registerButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleRegister" prefHeight="40.0" styleClass="button-primary" text="Daftar" />
          </children>
          <padding>
             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
