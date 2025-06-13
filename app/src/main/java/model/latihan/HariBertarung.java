@@ -1,8 +1,5 @@
 package model.latihan;
 
-// File: model/latihan/HariBertarung.java
-// Deskripsi: Versi perbaikan dengan penambahan getter method.
-
 import model.user.CatatanLatihan;
 import model.user.Pengguna;
 
