@@ -1,11 +1,11 @@
 package model.latihan;
 
+import model.user.CatatanLatihan;
+import model.user.Pengguna;
+
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-
-import model.user.CatatanLatihan;
-import model.user.Pengguna;
 
 public class HariBertarung implements AktivitasHarian {
     private int hariKe;
@@ -17,6 +17,19 @@ public class HariBertarung implements AktivitasHarian {
         this.daftarLatihanHarian = daftarLatihanHarian;
         this.namaProgram = namaProgram;
     }
+
+    // =========================================================================
+    // === METODE BARU YANG DITAMBAHKAN UNTUK MEMPERBAIKI ERROR ===
+    // =========================================================================
+    /**
+     * Mengembalikan daftar latihan untuk hari ini.
+     * Metode ini dibutuhkan oleh GUI Controller untuk mengakses data.
+     * @return List dari objek Latihan.
+     */
+    public List<Latihan> getDaftarLatihanHarian() {
+        return daftarLatihanHarian;
+    }
+    // =========================================================================
 
     @Override
     public void lakukanAktivitas(Pengguna pengguna, Scanner scanner) {
